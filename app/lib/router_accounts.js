@@ -18,7 +18,7 @@ AccountsTemplates.configure({
 	termsUrl: App.about + 'conditions-generales-d-utilisation',
 
 	// Redirects
-	homeRoutePath: '/home',
+	homeRoutePath: '/',
 });
 
 AccountsTemplates.configureRoute('changePwd');
