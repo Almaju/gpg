@@ -16,13 +16,11 @@ Template.cards.onRendered(function(){
 		this.$('#tinderslide').jTinder({
 			// dislike callback
 			onDislike: function (item) {
-				console.log('refuse');
 				Meteor.call('refuse', $(item).attr('id'));
 			},
 			// like callback
 			onLike: function (item) {
-				console.log('like');
-				Meteor.call('request', $(item).attr('id'), function(r){
+				Meteor.call('request', $(item).attr('id'), function(e, r){
 					if(r){ alert("It's a match!") }
 				});
 			},
@@ -39,7 +37,7 @@ Template.cards.onRendered(function(){
 })
 Template.cards.events({
 	'click .like, click .dislike': function(e, tpl){
-		tpl.$('#tinderslide').jTinder($(e.currentTarget).attr('class'));
+		tpl.$('#tinderslide').jTinder($(e.currentTarget).attr('id'));
 	}
 })
 

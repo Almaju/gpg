@@ -40,6 +40,6 @@ Meteor.methods({
 	},
 	clean: function(){
 		Meteor.users.update(this.userId, {$set: {"private.requests": [], "private.refusals": []}});
-		Conversation.delete({users: this.userId});
+		Conversation.remove({users: this.userId});
 	}
 })
