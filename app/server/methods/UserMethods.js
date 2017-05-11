@@ -39,7 +39,7 @@ Meteor.methods({
 		Message.update({conversation_id: conversation_id, authorId: {$ne: this.userId}}, {$set: {read: true}}, {multi: true});
 	},
 	clean: function(){
-		Meteor.users.update({}, {$set: {"private.requests": [], "private.refusals": []}}, {multi: true});
+		Meteor.users.update({}, {$set: {"private": {}}}, {multi: true});
 		Conversation.remove({});
 	}
 })
