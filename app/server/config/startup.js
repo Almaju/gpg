@@ -22,9 +22,6 @@ let categories = [
 	{
 		name: 'Sport',
 		icon: 'basketball-jersey'
-		// children: [
-		// 	'Football', 'Basketball', 'Tennis'
-		// ]
 	},
 	{
 		name: 'Music',
@@ -40,7 +37,7 @@ let categories = [
 	},
 	{
 		name: 'Sciences',
-		icon: 'calculator'
+		icon: 'chemistry'
 	},
 	{
 		name: 'Business',
@@ -49,6 +46,18 @@ let categories = [
 	{
 		name: 'Languages',
 		icon: 'earth-globe'
+	},
+	{
+		name: 'Videogames',
+		icon: 'gamepad'
+	},
+	{
+		name: 'Movies',
+		icon: 'film'
+	},
+	{
+		name: 'Domestic',
+		icon: 'fried-egg'
 	},
 ]
 
@@ -59,3 +68,4 @@ categories.forEach(function(c){
 		$set: c
 	});
 });
+Category.remove({name: {$nin: _.pluck(categories, 'name')}});

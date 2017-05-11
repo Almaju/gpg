@@ -1,11 +1,8 @@
 template(name="home")
-	if userSetup
-		if Template.subscriptionsReady
-			+cards
-		else
-			+loading
+	if Template.subscriptionsReady
+		+cards
 	else
-		+settings
+		+loading
 		
 
 template(name="cards")

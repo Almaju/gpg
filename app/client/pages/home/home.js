@@ -2,12 +2,10 @@
 
 Template.home.onCreated(function(){
 	this.subscribe('Matches');
-})
-Template.home.helpers({
-	userSetup: function(){
-		let u = Meteor.user();
-		return u.profile.firstname && !_.isEmpty(u.private.interests) && !_.isEmpty(u.private.skills);
-	}
+
+	let u = Meteor.user();
+	if(!(u.profile.firstname && !_.isEmpty(u.private.interests) && !_.isEmpty(u.private.skills)))
+		FlowRouter.go('settings');
 })
 
 Template.cards.onRendered(function(){
