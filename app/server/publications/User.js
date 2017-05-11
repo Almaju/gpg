@@ -1,5 +1,5 @@
 Meteor.publish('Global', function(){
-	return [Category.find(), Meteor.users.find({_id: this.userId})];
+	return [Category.find(), Meteor.users.find({_id: this.userId}), Conversation.find({users: this.userId})];
 })
 
 Meteor.publish('Matches', function(){
@@ -7,7 +7,10 @@ Meteor.publish('Matches', function(){
 
 	return Meteor.users.find({
 		_id: {$nin: _.union(user.requests(), user.refusals()) || []},
-		'private.categories': {$in: user.categories()}
+		$or: [
+			{'private.skills': {$in: user.interests()}},
+			{'private.interests': {$in: user.skills()}},
+		]
 	});
 })
 

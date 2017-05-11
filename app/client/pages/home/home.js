@@ -1,34 +1,46 @@
-import Swing from 'swing';
+// import Swing from 'swing';
 
 Template.home.onCreated(function(){
 	this.subscribe('Matches');
 })
+Template.home.helpers({
+	userSetup: function(){
+		let u = Meteor.user();
+		return u.profile.firstname && !_.isEmpty(u.private.interests) && !_.isEmpty(u.private.skills);
+	}
+})
 
 Template.cards.onRendered(function(){
-	console.log(Swing);
-	const stack = Swing.Stack({
-		allowedDirections: [Swing.Direction.LEFT, Swing.Direction.RIGHT]
-	});
-	const cards = {};
-	
-	this.$('.cards .card').each((i, targetElement) => {
-		// Add card element to the Stack. 
-		cards[$(targetElement).attr('id')] = stack.createCard(targetElement);
-	});
-	 
-	// Add event listener for when a card is thrown out of the stack. 
-	stack.on('throwout', (event) => {
-		Meteor.call(event.throwDirection == Swing.Direction.LEFT? 'request' : 'refuse', $(event.target).attr('id'));
-	});
+	let tinder = function(){
+		console.log('jTinder init');
+		this.$('#tinderslide').jTinder({
+			// dislike callback
+			onDislike: function (item) {
+				console.log('refuse');
+				Meteor.call('refuse', $(item).attr('id'));
+			},
+			// like callback
+			onLike: function (item) {
+				console.log('like');
+				Meteor.call('request', $(item).attr('id'), function(r){
+					if(r){ alert("It's a match!") }
+				});
+			},
+			animationRevertSpeed: 200,
+			animationSpeed: 400,
+			threshold: 1,
+			likeSelector: '.like',
+			dislikeSelector: '.dislike'
+		});
+	};
 
-	this.$('.cards .card .btn-floating').click(function(){
-		let card = cards[$(this).closest('.card').attr('id')];
-		
-		if($(this).attr('id') == 'cafe')
-			card.throwOut(0, 50, Swing.Direction.LEFT);
-		else
-			card.throwOut(0, 50, Swing.Direction.RIGHT);
-	});
+	Meteor.users.find().observeChanges(tinder);
+	tinder();
+})
+Template.cards.events({
+	'click .like, click .dislike': function(e, tpl){
+		tpl.$('#tinderslide').jTinder($(e.currentTarget).attr('class'));
+	}
 })
 
 Template.cards.helpers({
@@ -37,7 +49,16 @@ Template.cards.helpers({
 	}
 })
 Template.card.helpers({
-	categories: function(){
-		return Category.find({_id: {$in: _.intersection(this.private.categories, Meteor.user().private.categories)}});
+	hasSkill: function(){
+		return Meteor.user().hasSkill(this._id);
+	},
+	hasInterest: function(){
+		return Meteor.user().hasInterest(this._id);
+	},
+	getSkills: function(){
+		return Category.find({_id: {$in: this.skills()}});
+	},
+	getInterests: function(){
+		return Category.find({_id: {$in: this.interests()}});
 	}
 })

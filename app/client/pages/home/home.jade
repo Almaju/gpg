@@ -1,29 +1,57 @@
 template(name="home")
-	if Template.subscriptionsReady
-		+cards
+	if userSetup
+		if Template.subscriptionsReady
+			+cards
+		else
+			+loading
 	else
-		+loading
+		+settings
 		
 
 template(name="cards")
-	.cards
-		+each matches
-			+card
-	p(style="margin-top:3em").center-align No people here!
+	#tindercontainer
+		#tinderslide
+			ul
+				+each matches
+					+card
+			p No more people :'(
+
+	.toolbar
+		.actions
+			.btn-floating.btn-large.waves-effect.waves-light.grey.dislike.left
+				i.material-icons close
+			.btn-floating.btn-large.waves-effect.waves-light.green.like.right
+				i.material-icons local_cafe
+	//- .cards
+	//- 	+each matches
+	//- 		+card
+	//- p(style="margin-top:3em").center-align No people here!
 
 
 template(name="card")
-	.card(id="#{_id}")
+	li.card(id="#{_id}")
 		.card-content
-			h5 #{profile.firstname}
-				small #{profile.bio}
-			ul
-				li
-					strong Interests in common
-				+each categories
-					li #{name}
-		.card-action
-			.btn-floating.btn-large.waves-effect.waves-light.green#cafe
-				i.material-icons local_cafe
-			.btn-floating.btn-large.waves-effect.waves-light.grey#remove
-				i.material-icons close
+			.row
+				.col.s4
+					img(src="/icons/user.png" alt="" class="circle").z-depth-1.responsive-img
+				.col.s8
+					h5 #{profile.firstname}
+						br
+						small #{profile.bio}
+				.col.s12
+					.divided.subheader Interests
+				+each getInterests
+					.col.s4.thin
+						.category
+							.card(class="{{is hasInterest 'active' ''}}")
+								+icon
+							strong #{name}
+				
+				.col.s12
+					.divided.subheader Skills
+				+each getSkills
+					.col.s4.thin
+						.category
+							.card(class="{{is hasSkill 'active' ''}}")
+								+icon
+							strong #{name}

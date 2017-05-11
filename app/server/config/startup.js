@@ -43,7 +43,7 @@ let categories = [
 		icon: 'calculator'
 	},
 	{
-		name: 'Businness',
+		name: 'Business',
 		icon: 'pie-chart'
 	},
 	{

@@ -10,19 +10,23 @@ Schema.UserProfile = new SimpleSchema({
 	bio: {
 		type: String,
 	},
-	phone: {
-		type: String,
-		regEx: /0[1-9][0-9]{8}/,
-		optional: true,
-		autoform: {
-			label: "Numéro de téléphone",
-			icon: "phone"
-		}
-	},
+	// phone: {
+	// 	type: String,
+	// 	regEx: /0[1-9][0-9]{8}/,
+	// 	optional: true,
+	// 	autoform: {
+	// 		label: "Numéro de téléphone",
+	// 		icon: "phone"
+	// 	}
+	// },
 });
 
 Schema.UserPrivate = new SimpleSchema({
-	categories: {
+	skills: {
+		type: [String],
+		optional: true
+	},
+	interests: {
 		type: [String],
 		optional: true
 	},

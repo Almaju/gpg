@@ -3,24 +3,37 @@ template(name="settings")
 		.row
 			+settingsNav
 
-			#interests.col.s12
-				+each categories
-					.col.s4
-						.category
-							a.card.waves-effect(class="{{is hasCategory 'active' ''}}")
-								+icon
-							strong #{name}
-
 			#profile.col.s12
 				+autoForm id="editProfile" collection="Meteor.users" doc=currentUser type="update"
 					+afObjectField name='profile'
 					button.btn Submit
+
+			#interests.col.s12
+				+each categories
+					.col.s4
+						.category
+							a.card.waves-effect(class="{{is hasInterest 'active' ''}}")
+								+icon
+							strong #{name}
+
+			#skills.col.s12
+				+each categories
+					.col.s4
+						.category
+							a.card.waves-effect(class="{{is hasSkill 'active' ''}}")
+								+icon
+							strong #{name}
 	else
 		+loading
 
 template(name="settingsNav")
 	ul.tabs.z-depth-1
-		li.tab.col.s6
-			a.active(href="#interests") Interests
-		li.tab.col.s6
-			a(href="#profile") Profile
+		li.tab.col.s4
+			a.active(href="#profile") Profile
+		li.tab.col.s4
+			a(href="#interests") Interests
+				.badge {{getLength currentUser.interests}}
+		li.tab.col.s4
+			a(href="#skills") Skills
+				.badge {{getLength currentUser.skills}}
+		

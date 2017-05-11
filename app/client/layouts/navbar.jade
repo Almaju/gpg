@@ -1,20 +1,22 @@
 template(name="navbar")
-	nav
-		.nav-wrapper
-			a.brand-logo.center(href="{{pathFor 'index'}}")
-				|Meetclick
+	.navbar-fixed
+		nav
+			.nav-wrapper
+				a.brand-logo.center(href="{{pathFor 'index'}}")
+					|GπG
 
-			if isActiveRoute 'home'
-				ul.right
-					li.waves-effect.waves-light
-						a(href="{{pathFor 'messages'}}")
-							+lnr i="bubble"
-				ul.left
-					li.waves-effect.waves-light
-						a(href="{{pathFor 'settings'}}")
-							+lnr i="cog"
-			else
-				ul.left
-					li.waves-effect.waves-light
-						a.back
-							i.material-icons chevron_left
+				if isActiveRoute 'home'
+					ul.right
+						li.waves-effect.waves-light
+							a(href="{{pathFor 'messages'}}")
+								+lnr i="bubble"
+								//- i.material-icons chat
+					ul.left
+						li.waves-effect.waves-light
+							a(href="{{pathFor 'settings'}}")
+								+lnr i="cog"
+				else
+					ul.left
+						li.waves-effect.waves-light
+							a.back
+								i.material-icons chevron_left

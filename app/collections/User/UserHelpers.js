@@ -1,6 +1,9 @@
 Meteor.users.helpers({
-	categories: function(){
-		return this.private? this.private.categories || [] : [];
+	skills: function(){
+		return this.private? this.private.skills || [] : [];
+	},
+	interests: function(){
+		return this.private? this.private.interests || [] : [];
 	},
 	requests: function(){
 		return this.private? this.private.requests || [] : [];
@@ -12,7 +15,10 @@ Meteor.users.helpers({
 		return this.private? this.private.refusals || [] : [];
 	},
 
-	hasCategory: function(cat_id){
-		return _.contains(this.categories(), cat_id);
+	hasSkill: function(cat_id){
+		return _.contains(this.skills(), cat_id);
+	},
+	hasInterest: function(cat_id){
+		return _.contains(this.interests(), cat_id);
 	}
 });

@@ -10,6 +10,9 @@ template(name="messages")
 						.title.black-text #{mate.profile.firstname}
 						p #{last.message}
 						.secondary-content {{ago updatedAt}}
+				else
+					.collection-item
+						p No message
 
 	else
 		+loading

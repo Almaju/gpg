@@ -26,6 +26,10 @@ Schema.Conversation = new SimpleSchema({
 		type: [String],
 		optional: true,
 	},
+	read: {
+		type: [String],
+		optional: true,
+	},
 	createdAt: AutoValue.now,
 	updatedAt: AutoValue.update
 });
