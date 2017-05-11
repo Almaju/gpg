@@ -1,0 +1,26 @@
+template(name="settings")
+	if Template.subscriptionsReady
+		.row
+			+settingsNav
+
+			#interests.col.s12
+				+each categories
+					.col.s4
+						.category
+							a.card.waves-effect(class="{{is hasCategory 'active' ''}}")
+								+icon
+							strong #{name}
+
+			#profile.col.s12
+				+autoForm id="editProfile" collection="Meteor.users" doc=currentUser type="update"
+					+afObjectField name='profile'
+					button.btn Submit
+	else
+		+loading
+
+template(name="settingsNav")
+	ul.tabs.z-depth-1
+		li.tab.col.s6
+			a.active(href="#interests") Interests
+		li.tab.col.s6
+			a(href="#profile") Profile

@@ -1,0 +1,12 @@
+template(name="layout")
+	if Template.subscriptionsReady
+		+navbar
+		
+		if tabs
+			+Template.dynamic template=tabs
+		
+		if content
+			#app
+				+Template.dynamic template=content
+	else
+		+loading

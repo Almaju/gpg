@@ -1,0 +1,48 @@
+#guest main.container{
+	width:100%;
+
+	.col.z-depth-1{
+		@extend .white;
+		padding:.5em 2em;
+	}
+}
+
+.category{
+	margin:auto;
+	text-align:center;
+	
+	.card{
+		border-radius:50%;
+		margin:0;
+		margin: 1rem 0 0.5rem;
+
+		img{
+			padding:20%;
+		}
+
+		border:.4em solid transparent;
+		&.active{
+			border:.4em solid $primary-color;
+		}
+	}
+}
+
+.cards{
+	.card{
+		position:absolute;
+		left:1em;
+		right:1em;
+		// bottom:1.5rem;
+		// top:calc(#{$navbar-height-mobile} + 1.5rem);
+
+		.buttons{
+			height:20%;
+			text-align:center;
+
+			.btn-floating{
+				margin:1.5rem;
+				position:static;
+			}
+		}
+	}
+}

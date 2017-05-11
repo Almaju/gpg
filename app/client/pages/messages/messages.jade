@@ -1,0 +1,28 @@
+template(name="messages")
+	if Template.subscriptionsReady
+		.collection
+			if $.Session.get "conversation"
+				+conversation doc
+			else
+				+each conversations
+					a.collection-item.avatar.waves-effect.conversation(style="font-weight:{{is last.isRead 'normal' 'bold'}}")
+						img(src="/icons/user.png" alt="" class="circle").z-depth-1
+						.title.black-text #{mate.profile.firstname}
+						p #{last.message}
+						.secondary-content {{ago updatedAt}}
+
+	else
+		+loading
+
+template(name="conversation")
+	+each messages
+		.collection-item.avatar(style="font-weight:{{is isRead 'normal' 'bold'}}")
+			img(src="/icons/user.png" alt="" class="circle").z-depth-1
+			.title #{author.profile.firstname}
+			p #{message}
+			.secondary-content {{ago createdAt}}
+
+	+autoForm id="sendMessage" collection="Message" type="insert" scope="messages"
+		+afQuickField name="conversation_id" value=_id
+		+afQuickField name="message"
+		button.btn Submit

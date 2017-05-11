@@ -1,0 +1,86 @@
+html {
+	background-color: #eee;
+	max-width:$medium-screen-up;
+	margin:auto;
+}
+
+html, body, #__blaze-root{
+	height:100%;
+	width:100%;
+	max-width:100%;
+	overflow:hidden;
+}
+
+nav{
+	a:hover{
+		color:white;
+		text-decoration:none;
+	}
+
+	.lnr{
+		display: block;
+		font-size: 24px;
+		height: 56px;
+		line-height: 56px;
+	}
+
+	.brand-logo{
+		font-size:1.5rem!important;
+	}
+}
+
+#app{
+	height:100%;
+	max-height:calc(100% - #{$navbar-height-mobile});
+	overflow:auto;
+}
+
+main{
+	padding:1.5rem!important;
+}
+
+hr{
+	height:0px;
+	border-width:0px;
+	border-top:1px solid color('grey', 'lighten-2');
+	margin:1.5rem 0;
+}
+
+@font-face {
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url(MaterialIcons-Regular.eot); /* For IE6-8 */
+	src: local('Material Icons'),
+			 local('MaterialIcons-Regular'),
+			 url(/fonts/materialicons/MaterialIcons-Regular.woff2) format('woff2'),
+			 url(/fonts/materialicons/MaterialIcons-Regular.woff) format('woff'),
+			 url(/fonts/materialicons/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;  /* Preferred icon size */
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+
+	/* Support for all WebKit browsers. */
+	-webkit-font-smoothing: antialiased;
+	/* Support for Safari and Chrome. */
+	text-rendering: optimizeLegibility;
+
+	/* Support for Firefox. */
+	-moz-osx-font-smoothing: grayscale;
+
+	/* Support for IE. */
+	font-feature-settings: 'liga';
+}
+
+.tabs-content.carousel { height: 100%!important; }

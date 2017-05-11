@@ -1,0 +1,29 @@
+template(name="home")
+	if Template.subscriptionsReady
+		+cards
+	else
+		+loading
+		
+
+template(name="cards")
+	.cards
+		+each matches
+			+card
+	p(style="margin-top:3em").center-align No people here!
+
+
+template(name="card")
+	.card(id="#{_id}")
+		.card-content
+			h5 #{profile.firstname}
+				small #{profile.bio}
+			ul
+				li
+					strong Interests in common
+				+each categories
+					li #{name}
+		.card-action
+			.btn-floating.btn-large.waves-effect.waves-light.green#cafe
+				i.material-icons local_cafe
+			.btn-floating.btn-large.waves-effect.waves-light.grey#remove
+				i.material-icons close
