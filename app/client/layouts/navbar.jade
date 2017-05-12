@@ -9,6 +9,7 @@ template(name="navbar")
 					ul.right
 						li.waves-effect.waves-light
 							a(href="{{pathFor 'messages'}}")
+								.badge #{conversations_count}
 								+lnr i="bubble"
 								//- i.material-icons chat
 					ul.left

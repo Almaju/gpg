@@ -21,3 +21,9 @@ Template.navbar.events({
 			FlowRouter.go('home');
 	}
 })
+
+Template.navbar.helpers({
+	conversations_count: function(){
+		return Conversation.find().count();
+	}
+})

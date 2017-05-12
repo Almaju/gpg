@@ -7,7 +7,7 @@
 	}
 }
 
-.tabs .badge{
+.badge{
 	$size:24px;
 	display:inline-block;
 	border-radius:50%;
@@ -22,6 +22,11 @@
 	font-size:12px;
 	font-weight:500;
 	@extend .z-depth-1, .grey;
+}
+
+nav .badge{
+	margin-top:5px;
+	margin-left:10px;
 }
 
 .category{
