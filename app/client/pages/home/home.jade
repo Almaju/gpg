@@ -40,7 +40,7 @@ template(name="card")
 				+each getInterests
 					.col.s4.thin
 						.category
-							.card(class="{{is hasInterest 'active' ''}}")
+							.card(class="{{is hasSkill 'active' ''}}")
 								+icon
 							strong #{name}
 				
@@ -49,6 +49,6 @@ template(name="card")
 				+each getSkills
 					.col.s4.thin
 						.category
-							.card(class="{{is hasSkill 'active' ''}}")
+							.card(class="{{is hasInterest 'active' ''}}")
 								+icon
 							strong #{name}

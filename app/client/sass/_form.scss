@@ -1,0 +1,172 @@
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}
+
+.form{
+	background-color:white;
+	$form-gutter: 3.5rem;
+
+	.row{
+		margin:0;
+		border-bottom:1px solid $collection-border-color;
+
+		.col{
+			padding-top:.3rem;
+			padding-bottom:.3rem;
+			border-left:1px solid $collection-border-color;
+
+			&:first-child{
+				border-left:none;
+			}
+		}
+
+		.row{
+			padding:0;
+			border-bottom:0;
+
+			.col{
+				border:none;
+				padding:0;
+			}
+		}
+	}
+
+	.prefixed{
+		margin-left: $form-gutter;
+	}
+
+	.input-field{
+		margin:0;
+
+		.prefix{
+			color:color("grey", "base");
+			padding:14px 0;
+
+			~{
+				input, textarea, .timepicker{
+					margin-left:$form-gutter;
+					width:calc(100% - #{$form-gutter});
+				}
+			}
+		}
+
+		input, textarea, input.select-dropdown{
+			margin:0;
+			padding:14px 0;
+			height:28px;
+			
+			&, &:focus{
+				border:none!important;
+				box-shadow: none!important;
+			}
+
+			@include placeholder {
+				color:color("grey", "base");
+			}
+		}
+
+		.chips{
+			margin-bottom:0;
+			margin-left:$form-gutter;
+			border:none;
+
+			input{
+				padding:14px 0!important;
+				height:28px;
+			}
+		}
+	}
+
+	[type="checkbox"] + label{
+		margin-bottom:14px;
+		margin-left:10px;
+	}
+
+	.option{
+		display:block;
+		margin:.5rem 0 1rem $form-gutter;
+	}
+
+	.align-right input{
+		text-align:right;
+	}
+
+	.datepicker{
+		.picker__input{
+			// padding-bottom:0;
+		}
+		& > .row:nth-last-child(2){
+			border-bottom:none!important;
+		}
+	}
+	
+	$close-gutter: 56px / 2;
+	
+	.timepicker{
+		input{
+			width:calc(100% - #{$close-gutter})!important;
+		}
+		.row:first-child input{
+			// padding-bottom:0;
+		}
+		.close{
+			cursor:pointer;
+			float:right;
+			width:$close-gutter;
+			padding:($close-gutter / 2) 0;
+			text-align:right;
+			margin-top: .25rem;
+			font-size:1.5rem;
+			color:color("grey", "base");
+		}
+	}
+
+	input[type="file"]{
+		opacity:0;
+		height:1px;
+		width:1px;
+	}
+
+	.center-submit{
+		position:absolute;
+		margin:2.5rem auto 1.5rem;
+		left:0;
+		right:0;
+		text-align:center;
+		height:54px;
+	}
+
+	ul.select-dropdown{
+		li:first-child{
+			@extend .disabled;
+		}
+	}
+
+	.autocomplete-content{
+		position:absolute;
+	}
+	
+	.toggle:not(.visible){
+		display:none;
+	}
+}

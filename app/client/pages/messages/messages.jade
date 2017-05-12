@@ -24,8 +24,15 @@ template(name="conversation")
 			.title #{author.profile.firstname}
 			p #{message}
 			.secondary-content {{ago createdAt}}
+	else
+		.collection-item
+			p.center-align Say hi!
 
-	+autoForm id="sendMessage" collection="Message" type="insert" scope="messages"
+	+autoForm id="sendMessage" collection="Message" type="insert" scope="messages" class="form"
 		+afQuickField name="conversation_id" value=_id
-		+afQuickField name="message"
-		button.btn Submit
+		.row
+			.input-field.col.s9.l8
+				+afFieldInput name="message"
+			.input-field.col.s3.l4.right-align
+				button.btn-flat.btn-large.green-text.waves-effect.waves-green.btn-floating
+					i.grey-text.material-icons send

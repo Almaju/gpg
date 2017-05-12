@@ -74,6 +74,12 @@ hr{
 	}
 }
 
+#sendMessage{
+	position:fixed;
+	bottom:0;
+	width:100%;
+	border-top:1px solid color('grey', 'lighten-2');
+}
 
 // Header
 .header{

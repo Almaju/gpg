@@ -4,34 +4,35 @@ Template.home.onCreated(function(){
 	this.subscribe('Matches');
 
 	let u = Meteor.user();
-	if(!(u.profile.firstname && !_.isEmpty(u.private.interests) && !_.isEmpty(u.private.skills)))
+	if(!(u.profile && u.private && u.profile.firstname && !_.isEmpty(u.private.interests) && !_.isEmpty(u.private.skills)))
 		FlowRouter.go('settings');
 })
 
 Template.cards.onRendered(function(){
-	let tinder = function(){
-		console.log('jTinder init');
-		this.$('#tinderslide').jTinder({
-			// dislike callback
-			onDislike: function (item) {
-				Meteor.call('refuse', $(item).attr('id'));
-			},
-			// like callback
-			onLike: function (item) {
-				Meteor.call('request', $(item).attr('id'), function(e, r){
-					if(r){ alert("It's a match!") }
-				});
-			},
-			animationRevertSpeed: 200,
-			animationSpeed: 400,
-			threshold: 1,
-			likeSelector: '.like',
-			dislikeSelector: '.dislike'
-		});
-	};
-
-	Meteor.users.find().observeChanges(tinder);
-	tinder();
+	let tpl = this;
+	
+	Meteor.users.find().observeChanges({
+		added: function(){
+			console.log('jTinder init');
+			tpl.$('#tinderslide').jTinder({
+				// dislike callback
+				onDislike: function (item) {
+					Meteor.call('refuse', $(item).attr('id'));
+				},
+				// like callback
+				onLike: function (item) {
+					Meteor.call('request', $(item).attr('id'), function(e, r){
+						if(r){ alert("It's a match!") }
+					});
+				},
+				animationRevertSpeed: 200,
+				animationSpeed: 400,
+				threshold: 1,
+				likeSelector: '.like',
+				dislikeSelector: '.dislike'
+			});
+		}
+	});
 })
 Template.cards.events({
 	'click .like, click .dislike': function(e, tpl){
