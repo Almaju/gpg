@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+
+nav, h1, h2, h3, h4, h5, h6{
+	font-family: 'Roboto Slab', serif;
+}
+
 html {
 	background-color: #eee;
 	// max-width:$medium-screen-up;
@@ -13,6 +19,12 @@ html, body, #__blaze-root{
 
 #guest{
 	padding:2rem 0.5rem;
+	background-color:$primary-color;
+	height:100%;
+
+	.col{
+		background-color:white;
+	}
 }
 
 nav{
@@ -83,7 +95,7 @@ hr{
 
 // Header
 .header{
-	color:color("shotgun", "darken-2");
+	color:$primary-color;
 	font-weight:300;
 
 	small{
